@@ -1,0 +1,6 @@
+node_modules
+.yarn
+.cache
+public
+*.log
+.env

@@ -1,0 +1,37 @@
+version: '3'
+services:
+  app:
+    build: ./web-and-api
+    ports:
+    - "${APP_PORT}:8000"
+    restart: always
+    links:
+    - redis
+    - db
+    depends_on:
+    - redis
+    - db
+    volumes:
+    - ./web-and-api:/app
+    environment:
+    - NODE_ENV=development
+    command: >
+      /bin/sh -c "
+        while ! nc -z db 27017 || ! nc -z redis 6379;
+        do
+          echo sleeping;
+          sleep 1;
+        done;
+        echo Connected!;
+        yarn install;
+        yarn run start;
+      "
+  redis:
+    image: redis:alpine
+    ports:
+    - "6379:6379"
+  db:
+    image: mvertes/alpine-mongo
+    restart: always
+    ports:
+    - "27017:27017"

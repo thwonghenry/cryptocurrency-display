@@ -1,0 +1,11 @@
+node_modules
+.yarn
+.cache
+public
+*.log
+.env
+.env.sample
+.gitignore
+docker-compose.yml
+DOCKERFILE
+README.md
