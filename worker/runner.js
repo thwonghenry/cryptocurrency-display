@@ -5,5 +5,5 @@ const { interval } = require('./config.json');
 (async () => {
     await init();
     index();
-    setInterval(index, interval * 1000);    
+    setInterval(index, interval * 1000);
 })();
