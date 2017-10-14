@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
-import HomePageContainer from './pages/home/HomePageContainer';
+import HomePage from './pages/HomePage.jsx';
 
 
 class App extends PureComponent {
     render() {
-        return <HomePageContainer />;
+        return <HomePage />;
     }
 }
 
