@@ -5,8 +5,8 @@ import moment from 'moment';
 
 const namespace = 'currency';
 
-const LOADING = `${namespace}/LOADING`;
-const LOADED = `${namespace}/LOADED`;
+export const LOADING = `${namespace}/LOADING`;
+export const LOADED = `${namespace}/LOADED`;
 
 export const loadingData = () => ({
     type: LOADING
@@ -43,6 +43,9 @@ const currencyDataReducer = (state = {}, action) => {
     switch (action.type) {
     case LOADED: {
         const newState = { ...state };
+        if (!action.data || !action.data.forEach) {
+            return state;
+        }
         action.data.forEach((currency) => {
             newState[currency.pair] = currency;
         });
