@@ -9,7 +9,7 @@
     "start": "node server/index",
     "build": "NODE_ENV=production BABEL_ENV=production webpack --config src/webpack.config.js",
     "dev": "webpack --config src/webpack.config.js --watch",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",

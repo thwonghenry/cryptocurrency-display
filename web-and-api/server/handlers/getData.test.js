@@ -72,3 +72,8 @@ test('should get the newest data from DB if not exists, and cache it back', asyn
     const cachedData = await getData();
     expect(cachedData).toEqual(newestData);
 });
+
+afterAll(async() => {
+    await mockgoose.helper.reset();
+    return mongoose.disconnect();
+});
