@@ -6,17 +6,25 @@ const promisify = require('./lib/promisify');
 
 const isDevEnv = process.env.NODE_ENV === 'development';
 
-const router = require('./middlewares/router');
+const router = require('./router');
+
+const dbInit = require('./db/init');
 
 (async () => {
-    if (isDevEnv) {
-        const devMiddleware = require('./middlewares/devMiddleware');
-        await new Promise((resolve) => {
-            devMiddleware.waitUntilValid(resolve);
-        });
-        server.use(devMiddleware);
-        console.log('webpack done');
-    }
+    await Promise.all([
+        dbInit(),
+        (async () => {
+            if (isDevEnv) {
+                const devMiddleware = require('./middlewares/devMiddleware');
+                await new Promise((resolve) => {
+                    devMiddleware.waitUntilValid(resolve);
+                });
+                server.use(devMiddleware);
+                console.log('webpack done');
+            }
+        })()
+    ]);
+
     server.use(express.static(path.resolve('..', 'public')));
     server.use(express.json());
     server.use(router);

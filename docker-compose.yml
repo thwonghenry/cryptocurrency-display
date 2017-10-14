@@ -15,6 +15,8 @@ services:
     - ./web-and-api:/app
     environment:
     - NODE_ENV=development
+    - MONGODB_URL=mongodb://db:27017/${MONGODB_DATABASE}
+    - REDIS_LATEST_CACHE_KEY=${REDIS_LATEST_CACHE_KEY}
     command: >
       /bin/sh -c "
         while ! nc -z db 27017 || ! nc -z redis 6379;
@@ -60,5 +62,7 @@ services:
   db:
     image: mvertes/alpine-mongo
     restart: always
+    environment:
+    - MONGODB_DATABASE=${MONGODB_DATABASE}
     ports:
     - "27017:27017"
