@@ -7,12 +7,11 @@ const getNewestDataFromDB = async () => {
         const data = [];
         try {
             const cursor = Price.aggregate()
-                .sort({ base: 1, target: 1, timestamp: -1})
+                .sort({ pair: 1, timestamp: -1})
                 .group({
-                    _id: {
-                        base: '$base',
-                        target: '$target'
-                    },
+                    _id: '$pair',
+                    base: { '$first': '$base' },
+                    target: { '$first': '$target' },
                     price: { '$first': '$price' },
                     volume: { '$first': '$volume' },
                     change: { '$first': '$change' },
@@ -27,8 +26,9 @@ const getNewestDataFromDB = async () => {
                 }
                 if (doc) {
                     data.push({
-                        base: doc._id.base,
-                        target: doc._id.target,
+                        pair: doc._id,
+                        base: doc.base,
+                        target: doc.target,
                         price: doc.price,
                         volume: doc.volume,
                         change: doc.change,
@@ -43,7 +43,7 @@ const getNewestDataFromDB = async () => {
         }
     });
     data.sort((a, b) => {
-        if (a.base > b.base) {
+        if (a.pair > b.pair) {
             return 1;
         } else {
             return -1;

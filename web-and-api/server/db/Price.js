@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const PriceSchema = new Schema({
+    pair: String,
     base: String,
     target: String,
     price: Number,
@@ -11,8 +12,6 @@ const PriceSchema = new Schema({
     timestamp: Number
 });
 
-PriceSchema.index( { base: 1, target: 1, timestamp: 1 }, { unique: true } );
+PriceSchema.index( { pair: 1, timestamp: 1 }, { unique: true } );
 
-const Price = mongoose.model('Price', PriceSchema);
-
-module.exports = Price;
+module.exports = mongoose.model('Price', PriceSchema);

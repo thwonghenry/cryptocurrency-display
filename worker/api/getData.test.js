@@ -30,6 +30,7 @@ test('should transform data structure', async () => {
         const base = pairMatch[1].toUpperCase();
         const target = pairMatch[2].toUpperCase();
         return {
+            pair,
             base, target,
             price: 12345,
             volume: 12345,

@@ -24,6 +24,7 @@ module.exports = async (pairs) => {
     const data = await Promise.all(pairs.map(async (pair) => {
         const json = await fetchData(pair);
         return Object.assign({
+            pair,
             timestamp: json.timestamp
         }, json.ticker);
     }));
