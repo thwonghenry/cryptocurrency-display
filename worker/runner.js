@@ -1,5 +1,9 @@
 const index = require('./index');
+const init = require('./db/init');
 const { interval } = require('./config.json');
 
-index();
-setInterval(index, interval * 1000);
+(async () => {
+    await init();
+    index();
+    setInterval(index, interval * 1000);    
+})();

@@ -39,6 +39,7 @@ services:
     - ./worker:/app
     environment:
     - NODE_ENV=development
+    - MONGODB_URL=mongodb://db:27017/${MONGODB_DATABASE}
     command: >
       /bin/sh -c "
         while ! nc -z db 27017 || ! nc -z redis 6379;
