@@ -1,6 +1,6 @@
 # Cryptocurrency Real Time Price Check
 
-A simple view to show most currency price in USD
+A simple view to show most cryptocurrency price in USD
 
 ## Design
 
