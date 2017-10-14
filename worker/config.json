@@ -11,6 +11,6 @@
         "lsk-usd",
         "sjcx-usd"
     ],
-    "interval": 60,
+    "interval": 30,
     "waitBetweenRequest": 500
 }
