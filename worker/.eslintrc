@@ -1,23 +1,17 @@
 {
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["eslint:recommended"],
     "env": {
         "node": true,
         "es6": true,
-        "jest": true,
-        "browser": true
+        "jest": true
     },
-    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 2017,
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
         "sourceType": "module"
     },
-    "plugins": [
-        "react"
-    ],
+    "globals": {
+        "fetch": true
+    },
     "rules": {
         "indent": [
             "error",
@@ -35,7 +29,6 @@
             "error",
             "always"
         ],
-        "no-console": 0,
-        "react/prop-types": 0
+        "no-console": 0
     }
 }

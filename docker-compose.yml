@@ -26,6 +26,30 @@ services:
         yarn install;
         yarn run start;
       "
+  worker:
+    build: ./worker
+    restart: always
+    links:
+    - redis
+    - db
+    depends_on:
+    - redis
+    - db
+    volumes:
+    - ./worker:/app
+    environment:
+    - NODE_ENV=development
+    command: >
+      /bin/sh -c "
+        while ! nc -z db 27017 || ! nc -z redis 6379;
+        do
+          echo sleeping;
+          sleep 1;
+        done;
+        echo Connected!;
+        yarn install;
+        yarn run start;
+      "
   redis:
     image: redis:alpine
     ports:

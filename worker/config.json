@@ -1,0 +1,16 @@
+{
+    "pairs": [
+        "eth-usd",
+        "btc-usd",
+        "ltc-usd",
+        "xmr-usd",
+        "xrp-usd",
+        "doge-usd",
+        "dash-usd",
+        "maid-usd",
+        "lsk-usd",
+        "sjcx-usd"
+    ],
+    "interval": 60,
+    "waitBetweenRequest": 500
+}
