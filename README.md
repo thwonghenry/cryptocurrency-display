@@ -22,3 +22,9 @@ Then the web is up at `http://localhost:${APP_PORT}`, where `APP_PORT` default i
 
 The app server has watch mode on frontend source codes, the server will rebuild the bundle automatically when saved. Refresh to get the latest bundle.
 
+To shut down:
+
+```bash
+# ctrl + c
+docker-compose down
+```
