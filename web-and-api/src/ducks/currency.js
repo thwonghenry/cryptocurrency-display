@@ -1,6 +1,7 @@
 import processResponse from '../lib/processResponse';
 import { combineReducers } from 'redux';
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
 const namespace = 'currency';
 
@@ -58,6 +59,22 @@ export default combineReducers({
 });
 
 export const currencyData = (state) => state.currency.currencyData;
+
+export const lastUpdatedTime = createSelector(
+    currencyData,
+    (currencyData) => {
+        if (!currencyData) {
+            return false;
+        }
+        const lastUpdatedTime = Math.max(
+            ...(
+                Object.keys(currencyData)
+                    .map((pair) => currencyData[pair].timestamp)
+            )
+        );
+        return moment.unix(lastUpdatedTime).format('LL LTS');
+    }
+);
 
 export const availableCurrencies = createSelector(
     currencyData,

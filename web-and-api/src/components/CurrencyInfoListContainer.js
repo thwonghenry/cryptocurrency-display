@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import CurrencyInfoList from './CurrencyInfoList.jsx';
-import { availableCurrencies } from '../ducks/currency';
+import { availableCurrencies, lastUpdatedTime } from '../ducks/currency';
 import { fetchData } from '../ducks/currency';
 
 const selector = createStructuredSelector({
-    availableCurrencies
+    availableCurrencies,
+    lastUpdatedTime
 });
 
 const mapDispatchToProps = (dispatch) => ({

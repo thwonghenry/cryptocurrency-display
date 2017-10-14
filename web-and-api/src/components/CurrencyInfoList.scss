@@ -1,6 +1,10 @@
 .list {
-    align-content: space-between;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     padding-left: 0;
+}
+
+.remarks {
+    margin-bottom: 10px;
 }
