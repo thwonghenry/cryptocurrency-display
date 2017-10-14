@@ -26,6 +26,33 @@ services:
         yarn install;
         yarn run start;
       "
+  worker:
+    build: ./worker
+    restart: always
+    links:
+    - redis
+    - db
+    depends_on:
+    - redis
+    - db
+    volumes:
+    - ./worker:/app
+    environment:
+    - NODE_ENV=development
+    - MONGODB_URL=${MONGODB_HOST}/${MONGODB_DATABASE}
+    - REDIS_URL=${REDIS_URL}
+    - REDIS_LATEST_CACHE_KEY=${REDIS_LATEST_CACHE_KEY}
+    command: >
+      /bin/sh -c "
+        while ! nc -z db 27017 || ! nc -z redis 6379;
+        do
+          echo sleeping;
+          sleep 1;
+        done;
+        echo Connected!;
+        yarn install;
+        yarn run start;
+      "
   redis:
     image: redis:alpine
     ports:
