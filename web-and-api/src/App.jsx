@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
+import HomePage from './pages/HomePage.jsx';
+
 
 class App extends PureComponent {
     render() {
-        return <div>Hello World</div>;
+        return <HomePage />;
     }
 }
 

@@ -2,10 +2,16 @@ const path = require('path');
 const MinifyPlugin = require('babel-minify-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const postcssConfig = require('./postcss.config');
 
 const rootDir = path.resolve(__dirname, '../');
 
 const env = process.env.NODE_ENV;
+
+const cssLoaderOptions = {
+    modules: true,
+    importLoaders: 1 // support postcss loader
+};
 
 const config = {
     entry: [
@@ -27,6 +33,23 @@ const config = {
                 'babel-loader',
                 'eslint-loader'
             ]
+        }, {
+            test: /\.scss/,
+            exclude: ['node_modules'],
+            use: [{
+                loader: 'style-loader'
+            },
+            {
+                loader: 'css-loader',
+                options: cssLoaderOptions
+            },
+            {
+                loader: 'postcss-loader',
+                options: postcssConfig
+            },
+            {
+                loader: 'sass-loader'
+            }]
         }]
     },
     plugins: [
