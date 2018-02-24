@@ -1,9 +1,14 @@
+const express = require('express');
+const path = require('path');
+
+const server = express();
+
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
-const config = require('../../src/webpack.config.js');
+const config = require('./webpack.config.js');
 const compiler = webpack(config);
 
-module.exports = webpackMiddleware(compiler, {
+const devMiddleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
     stats: {
         colors: true
@@ -14,3 +19,9 @@ module.exports = webpackMiddleware(compiler, {
     },
     historyApiFallback: true
 });
+
+
+server.use(devMiddleware);
+server.use(express.static(path.resolve('public')));
+
+server.listen(8000);

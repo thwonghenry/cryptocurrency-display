@@ -1,0 +1,14 @@
+FROM mhart/alpine-node:9
+
+WORKDIR web
+ENV HOME="/web"
+
+COPY package.json .
+COPY yarn.lock .
+
+RUN yarn
+
+COPY . .
+
+# Expose port for the node server, ignored by Heroku
+EXPOSE 8000

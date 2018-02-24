@@ -1,0 +1,31 @@
+{
+  "name": "web-and-api",
+  "version": "1.0.0",
+  "main": "./src/app.js",
+  "repository": "https://github.com/thwonghenry/cryptocurrency-display.git",
+  "author": "Wong Tsun Hin",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/app",
+    "start:dev": "nodemon src/app",
+    "test": "eslint src/ && jest"
+  },
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "mongoose": "^4.12.1",
+    "redis": "^2.8.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      ".cache"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^1.15.1"
+  }
+}

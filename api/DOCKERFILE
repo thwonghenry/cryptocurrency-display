@@ -1,7 +1,7 @@
 FROM mhart/alpine-node:9
 
-WORKDIR worker
-ENV HOME="/worker"
+WORKDIR api
+ENV HOME="/api"
 
 COPY package.json .
 COPY yarn.lock .
@@ -10,3 +10,6 @@ ENV NODE_ENV production
 RUN yarn
 
 COPY . .
+
+# Expose port for the node server, ignored by Heroku
+EXPOSE 8000
