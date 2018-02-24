@@ -13,18 +13,17 @@ Make sure you have docker installed, then
 ```bash
 cd ${this_project_folder}
 cp .env.sample .env
-docker-compose up
+docker-compose up -d
 ```
 
-It will take some time to build the react bundle, can start access after `app is up!` is shown in the log.
+It will take some time to build the docker images and react bundle.
 
-Then the web is up at `http://localhost:${APP_PORT}`, where `APP_PORT` default is `8181`
+Then the web is up at `http://localhost:${WEB_PORT}`, where `WEB_PORT` default is `8182`
 
 The app server has watch mode on frontend source codes, the server will rebuild the bundle automatically when saved. Refresh to get the latest bundle.
 
 To shut down:
 
 ```bash
-# ctrl + c
 docker-compose down
 ```

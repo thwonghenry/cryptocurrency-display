@@ -1,9 +1,9 @@
 version: '3'
 services:
-  app:
-    build: ./web-and-api
+  api:
+    build: ./api
     ports:
-    - "${APP_PORT}:8000"
+    - "${API_PORT}:8000"
     restart: always
     links:
     - redis
@@ -12,7 +12,8 @@ services:
     - redis
     - db
     volumes:
-    - ./web-and-api:/app
+    - ./api:/api
+    - /api/node_modules/
     environment:
     - NODE_ENV=development
     - MONGODB_URL=mongodb://db:27017/${MONGODB_DATABASE}
@@ -25,9 +26,21 @@ services:
           sleep 1;
         done;
         echo Connected!;
-        yarn install;
-        yarn run start;
+        yarn;
+        yarn start:dev;
       "
+  web:
+    build: ./web
+    ports:
+    - "${WEB_PORT}:8000"
+    restart: always
+    volumes:
+    - ./web:/web
+    - /web/node_modules/
+    environment:
+    - NODE_ENV=development
+    - API_ENDPOINT=localhost:${API_PORT}
+    command: /bin/sh -c "yarn && yarn dev:server"
   worker:
     build: ./worker
     restart: always
@@ -38,7 +51,8 @@ services:
     - redis
     - db
     volumes:
-    - ./worker:/app
+    - ./worker:/worker
+    - /worker/node_modules/
     environment:
     - NODE_ENV=development
     - MONGODB_URL=${MONGODB_HOST}/${MONGODB_DATABASE}

@@ -18,12 +18,12 @@ export const loadedData = (data) => ({
 });
 
 export const fetchData = () => async (dispatch) => {
-    let data;
     try {
-        data = await fetch('/data').then(processResponse);
+        const data = await fetch(`http://${process.env.API_ENDPOINT}/data`).then(processResponse);
         dispatch(loadedData(data));
         return data;
     } catch (error) {
+        // eslint-disable-next-line
         console.error(error);
     }
 };
@@ -73,6 +73,7 @@ export const lastUpdatedTime = createSelector(
             ...(
                 Object.keys(currencyData)
                     .map((pair) => currencyData[pair].timestamp)
+                    .filter(timestamp => timestamp > 0)
             )
         );
         return moment.unix(lastUpdatedTime).format('LL LTS');

@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssConfig = require('./postcss.config');
 
-const rootDir = path.resolve(__dirname, '../');
+const rootDir = __dirname;
 
 const env = process.env.NODE_ENV;
 
@@ -31,7 +31,6 @@ const config = {
             exclude: ['node_modules'],
             use: [
                 'babel-loader',
-                'eslint-loader'
             ]
         }, {
             test: /\.scss/,
@@ -61,6 +60,11 @@ const config = {
                 removeComments: true,
                 collapseWhitespace: true
             } : false
+        }),
+        new webpack.DefinePlugin({
+            'process.env': {
+                API_ENDPOINT: JSON.stringify(process.env.API_ENDPOINT)
+            }
         })
     ]
 };

@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node runner",
-    "test": "jest --forceExit"
+    "test": "eslint && jest"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
@@ -24,58 +24,6 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       ".cache"
-    ],
-    "modulePathIgnorePatterns": [
-      "chalk",
-      "ansi-styles",
-      "supports-color",
-      "has-flag",
-      "ansi-regex",
-      "is-number",
-      "kind-of",
-      "iconv-lite",
-      "bson",
-      "sliced",
-      "async",
-      "debug",
-      "resolve-from",
-      "readable-stream",
-      "pify",
-      "request",
-      "hawk",
-      "boom",
-      "string-width",
-      "minimist",
-      "acorn",
-      "assert-plus",
-      "wordwrap",
-      "har-validator",
-      "qs",
-      "source-map",
-      "path-exists",
-      "ajv",
-      "load-json-file",
-      "har-schema",
-      "performance-now",
-      "camelcase",
-      "read-pkg",
-      "form-data",
-      "sntp",
-      "read-pkg-up",
-      "yargs",
-      "path-type",
-      "http-signature",
-      "find-up",
-      "hoek",
-      "strip-bom",
-      "is-fullwidth-code-point",
-      "aws-sign2",
-      "cryptiles",
-      "cliui",
-      "callsites",
-      "esprima",
-      "strip-ansi",
-      "webidl-conversions"
     ]
   }
 }
